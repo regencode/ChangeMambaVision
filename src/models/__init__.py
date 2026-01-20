@@ -1,3 +1,3 @@
-from .ChangeMambaVisionModel import MambaVisionCD as ChangeMambaVision
+from .ChangeMambaVisionModel import MambaVisionCD
 
 
