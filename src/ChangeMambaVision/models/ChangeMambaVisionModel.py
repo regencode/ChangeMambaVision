@@ -58,7 +58,7 @@ class MambaVisionCD(nn.Module):
         print(f"using downsample={patchembed_downsample}")
         print(f"using dims={self.enc.dims}")
         self.decoder = DecoderTransformer_v3(input_transform='multiple_select', in_index=[0, 1, 2, 3], align_corners=False, 
-                                                in_channels=self.enc.dims, embedding_dim=dims[1]*2, output_nc=num_classes, 
+                                                in_channels=self.enc.dims, embedding_dim=self.enc.dims[1]*2, output_nc=num_classes, 
                                                 decoder_softmax=False, feature_strides=[2, 4, 8, 16])
     def forward(self, x1, x2):
         _, _, H, W = x1.shape
