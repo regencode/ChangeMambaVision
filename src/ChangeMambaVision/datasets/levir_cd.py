@@ -18,7 +18,7 @@ def load_levir(drive_path, patchify=False, patch_size=(256, 256), verbose=False)
         return
 
     data_splits = glob.glob(DATA_SOURCE + "*.zip")
-    if(len(data_splits) <= 2):
+    if(len(data_splits) <= 0):
         print("Zip files not found in LEVIR-CD folder")
         return
     os.makedirs(DATA_DEST)
