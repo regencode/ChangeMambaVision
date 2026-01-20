@@ -1,9 +1,7 @@
 <h1 align="center" style="font-size:48px; font-weight:600;">
-  ChangeMambaVision
-</h1>
-<h2 align="center" style="font-size:28px;">
+  ChangeMambaVision: 
   Adapting MambaVision for Change Detection
-</h2>
+</h1>
 
 ![ChangeMambaVision](images/ChangeMambaVision.svg)
 
