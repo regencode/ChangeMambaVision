@@ -1,4 +1,10 @@
-# ChangeMambaVision: Adapting MambaVision for Change Detection
+
+<div style="display:flex; align-items:center; justify-content:center; height:200px; font-size:40px;">
+    ChangeMambaVision
+</div> 
+<div style="display:flex; align-items:center; justify-content:center; height:160px; font-size:28px;">
+    Adapting MambaVision for Change Detection
+</div> 
 
 ![ChangeMambaVision](images/ChangeMambaVision.svg)
 
