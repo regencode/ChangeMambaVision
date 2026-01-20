@@ -1,10 +1,12 @@
 
-<div style="display:flex; align-items:center; justify-content:center; height:200px; font-size:40px;">
-    ChangeMambaVision
-</div> 
-<div style="display:flex; align-items:center; justify-content:center; height:160px; font-size:28px;">
-    Adapting MambaVision for Change Detection
-</div> 
+<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:360px;">
+    <div style="font-size:48px; font-weight:600;">
+        ChangeMambaVision
+    </div>
+    <div style="font-size:28px; margin-top:8px;">
+        Adapting MambaVision for Change Detection
+    </div>
+</div>
 
 ![ChangeMambaVision](images/ChangeMambaVision.svg)
 
