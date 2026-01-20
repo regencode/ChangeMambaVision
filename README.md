@@ -18,16 +18,11 @@
 - resolution 224 -> 256 to make it in line with CD patches
 - MambaVision forward() will return outputs at multiple levels
 
-## Quickstart
-
-TODO
-
 ## Usage
 
-TODO
+For now supported usage is through code/notebook as linked in the example usage notebook.
 
-Example notebook: 
-
+Example usage notebook: [Google Colab](https://colab.research.google.com/drive/1a4PRenQ04i1NBtV05Zzv-i5woGyuMGdc?usp=sharing)
 
 ## Available checkpoints
 
