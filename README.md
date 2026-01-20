@@ -2,6 +2,12 @@
 
 ![ChangeMambaVision](images/ChangeMambaVision.svg)
 
+
+## Metrics
+
+![Metrics](images/metrics.png)
+
+
 ## Changes from original -> custom MambaVision
 
 - in_dims -> patch_embed_dim (default to 256)
