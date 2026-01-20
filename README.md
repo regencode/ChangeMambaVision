@@ -1,12 +1,9 @@
-
-<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:360px;">
-    <div style="font-size:48px; font-weight:600;">
-        ChangeMambaVision
-    </div>
-    <div style="font-size:28px; margin-top:8px;">
-        Adapting MambaVision for Change Detection
-    </div>
-</div>
+<p align="center" style="font-size:48px; font-weight:600;">
+  ChangeMambaVision
+</p>
+<p align="center" style="font-size:28px;">
+  Adapting MambaVision for Change Detection
+</p>
 
 ![ChangeMambaVision](images/ChangeMambaVision.svg)
 
