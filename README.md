@@ -18,6 +18,19 @@
 - resolution 224 -> 256 to make it in line with CD patches
 - MambaVision forward() will return outputs at multiple levels
 
+## Available checkpoints
+
+ChangeMambaVision should work with any checkpoint of MambaVision. However we only tested the -T, -S, and -B checkpoints.
+
+Please raise a github issue if there are some incompatibility of a checkpoint with ChangeFormer.
+
+## Datasets
+
+The LEVIR-CD dataset can be downloaded from ![](https://justchenhao.github.io/LEVIR/)
+
+The WHU Building Change Detection (WHU-CD) dataset can be downloaded from ![](https://gpcv.whu.edu.cn/data/building_dataset.html)
+
+
 ## Licenses
 
 Copyright © 2025, NVIDIA Corporation. All rights reserved.
