@@ -6,7 +6,7 @@
 ![ChangeMambaVision](images/ChangeMambaVision.svg)
 
 
-## Metrics
+## Metrics of -T, -S, -B checkpoints
 
 ![Metrics](images/metrics.png)
 
@@ -17,6 +17,17 @@
 - dims in list form for each level instead of single integer for the first level
 - resolution 224 -> 256 to make it in line with CD patches
 - MambaVision forward() will return outputs at multiple levels
+
+## Quickstart
+
+TODO
+
+## Usage
+
+TODO
+
+Example notebook: 
+
 
 ## Available checkpoints
 
