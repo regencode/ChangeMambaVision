@@ -24,7 +24,7 @@ ChangeMambaVision should work with any checkpoint of MambaVision. However we onl
 
 Please raise a github issue if there are 
 some incompatibility of a checkpoint with ChangeFormer due to 
-e.g. mismatched encoder-decoder channels or import error
+e.g. mismatched encoder-decoder channels or import error.
 
 ## Datasets
 
