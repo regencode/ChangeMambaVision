@@ -17,8 +17,11 @@ def load_levir(drive_path, patchify=False, patch_size=(256, 256), verbose=False)
         print("Data patch folder already exists! Skipping loading and unzipping data...")
         return
 
-    os.makedirs(DATA_DEST)
     data_splits = glob.glob(DATA_SOURCE + "*.zip")
+    if(len(data_splits) <= 2):
+        print("Zip files not found in LEVIR-CD folder")
+        return
+    os.makedirs(DATA_DEST)
     for split in data_splits:
         dest = shutil.copy(split, DATA_DEST)
         os.makedirs(DATA_DEST + "/" + dest.split("/")[-1][:-4])
