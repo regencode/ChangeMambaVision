@@ -28,9 +28,9 @@ e.g. mismatched encoder-decoder channels or import error
 
 ## Datasets
 
-The LEVIR-CD dataset can be downloaded from ![](https://justchenhao.github.io/LEVIR/)
+The LEVIR-CD dataset can be downloaded from ![the official website](https://justchenhao.github.io/LEVIR/).
 
-The WHU Building Change Detection (WHU-CD) dataset can be downloaded from ![](https://gpcv.whu.edu.cn/data/building_dataset.html)
+The WHU Building Change Detection (WHU-CD) dataset can be downloaded from ![the official website at Section 4](https://gpcv.whu.edu.cn/data/building_dataset.html).
 
 
 ## Licenses
