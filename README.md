@@ -22,7 +22,9 @@
 
 ChangeMambaVision should work with any checkpoint of MambaVision. However we only tested the -T, -S, and -B checkpoints.
 
-Please raise a github issue if there are some incompatibility of a checkpoint with ChangeFormer.
+Please raise a github issue if there are 
+some incompatibility of a checkpoint with ChangeFormer due to 
+e.g. mismatched encoder-decoder channels or import error
 
 ## Datasets
 
