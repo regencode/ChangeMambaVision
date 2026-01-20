@@ -40,7 +40,9 @@ The WHU-CD dataset can be downloaded from [the official website](https://gpcv.wh
 
 ## Open data
 
-For availability of research data, logs and training checkpoints can be found here: 
+For availability of research data, 
+
+logs and training checkpoints can be found here: 
 [LEVIR-CD](https://drive.google.com/drive/folders/1n5511TPaLOWhYHGyuyc2cpG6hLmYjPmL?usp=sharing) and 
 [WHU-CD](https://drive.google.com/drive/folders/1KZ1SUP1tSouDOT9JFabAVi84lHoeVdbd?usp=sharing)
 
