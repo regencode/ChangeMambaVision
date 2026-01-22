@@ -13,10 +13,17 @@
 
 ## Changes from original -> custom MambaVision
 
-- in_dims -> patch_embed_dim (default to 256)
-- dims in list form for each level instead of single integer for the first level
-- resolution 224 -> 256 to make it in line with CD patches
-- MambaVision forward() will return outputs at multiple levels
+1. For the initial patch embedding layer (PatchEmbed),
+BatchNorm2d layers are changed to LayerNorm2d.
+
+2. LayerNorm2d is applied to the features after every level
+and before downsampling to the next level.
+
+3. MambaVision.forward() is modified to return intermediate features at each level after the normalization layer
+introduced at modification (2).
+
+4. kwargs[‘resolution’] is changed from 224 to 256 to
+match the size of the patched dataset images
 
 ## Usage
 
