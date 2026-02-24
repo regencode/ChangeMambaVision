@@ -9,9 +9,8 @@ from sklearn.model_selection import train_test_split
 import glob
 import re
 
-def load_whu(drive_path, patchify=False, patch_size=(256, 256), verbose=False):
+def load_whu(zip_path, patchify=False, patch_size=(256, 256), verbose=False, skip_copy=True):
     MODULE_DIR = get_module_dir()
-    DATA_SOURCE = drive_path
     DATA_DEST = f"{MODULE_DIR}/WHU_CD"
     DATA_PATCH_FOLDER = f"{MODULE_DIR}/WHU_CD_PATCHED/"
 
@@ -19,7 +18,7 @@ def load_whu(drive_path, patchify=False, patch_size=(256, 256), verbose=False):
         print("Data unzip dest folder already exists! Skipping loading data...")
     else: 
         os.makedirs(DATA_DEST)
-        dest = shutil.copy(DATA_SOURCE, DATA_DEST)
+        dest = shutil.copy(zip_path, DATA_DEST)
         with zipfile.ZipFile(dest, 'r') as z:
             z.extractall(DATA_DEST + "/" + dest.split("/")[-1][:-4])
         print("Data load and unzip complete")
