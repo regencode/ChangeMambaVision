@@ -7,17 +7,17 @@ from torch import nn, optim
 from torch.optim import lr_scheduler
 import matplotlib.pyplot as plt
 import pytorch_lightning as pl
-from cdresearch.utils.train_test_val_lightning import ChangeDetectionModel
+from ChangeMambaVision.utils.train_test_val_lightning import ChangeDetectionModel
 from torch.utils.data import DataLoader
 from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import CSVLogger
-import cdresearch
-from cdresearch.datasets.levir_cd import LEVIR_CD_Dataset, load_levir
-from cdresearch.utils.train_test_val import train_one_epoch, test_one_epoch
-from cdresearch.utils.display import display_images
+import ChangeMambaVision
+from ChangeMambaVision.datasets.levir_cd import LEVIR_CD_Dataset, load_levir
+from ChangeMambaVision.utils.train_test_val import train_one_epoch, test_one_epoch
+from ChangeMambaVision.utils.display import display_images
 import mamba_ssm
-from cdresearch.models import CDMamba
-from cdresearch.utils import augmentations as A
+from ChangeMambaVision.models import CDMamba
+from ChangeMambaVision.utils import augmentations as A
 import glob, shutil, os
 from pyunpack import Archive
 from torch.utils.data import DataLoader
