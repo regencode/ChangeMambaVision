@@ -77,7 +77,7 @@ def main(config):
 
     ##############################################################
 
-    model = CDMamba(**config.model)
+    model = CDMamba(**vars(config.model))
     model = model.to("cuda")
     summary(model, input_size=((1, 3, 256, 256), (1, 3, 256, 256)))
 
