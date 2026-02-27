@@ -12,7 +12,7 @@ from monai.networks.layers.utils import get_act_layer, get_norm_layer
 from monai.utils import UpsampleMode
 from einops import rearrange
 from mamba_ssm import Mamba as Mamba_ssm
-from models.mamba_customer import ConvMamba, L_GF_Mamba, G_GL_Mamba
+from .mamba_customer import ConvMamba, L_GF_Mamba, G_GL_Mamba
 
 
 def get_dwconv_layer(

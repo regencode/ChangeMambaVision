@@ -16,7 +16,7 @@ from ChangeMambaVision.datasets.levir_cd import LEVIR_CD_Dataset, load_levir
 from ChangeMambaVision.utils.train_test_val import train_one_epoch, test_one_epoch
 from ChangeMambaVision.utils.display import display_images
 import mamba_ssm
-from ChangeMambaVision.models import CDMamba
+from ChangeMambaVision.models.CDMamba.models.CDMamba import CDMamba
 from ChangeMambaVision.utils import augmentations as A
 import glob, shutil, os
 from pyunpack import Archive
@@ -77,7 +77,11 @@ def main(config):
 
     ##############################################################
 
-    model = CDMamba(**vars(config.model))
+    MODEL_CONFIG = vars(config.model)
+    norm = vars(MODEL_CONFIG["norm"])
+    print(norm)
+    MODEL_CONFIG["norm"] = (norm["type"], vars(norm["args"]))
+    model = CDMamba(**MODEL_CONFIG)
     model = model.to("cuda")
     summary(model, input_size=((1, 3, 256, 256), (1, 3, 256, 256)))
 
@@ -188,5 +192,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     with open(args.config, "r") as f:
         config_dict = yaml.safe_load(f)
+    print(config_dict)
     config = dict_to_namespace(config_dict)
     main(config)
