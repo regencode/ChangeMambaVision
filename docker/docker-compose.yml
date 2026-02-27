@@ -1,0 +1,11 @@
+services:
+  cdmamba:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    command: --config /app/configs/cdmamba-config.yaml
