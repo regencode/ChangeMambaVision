@@ -35,6 +35,10 @@ def dict_to_namespace(d):
     return SimpleNamespace(**d)
 
 def main(config):
+    print("CUDA available:", torch.cuda.is_available())
+    print("CUDA device count:", torch.cuda.device_count())
+    print("Torch CUDA version:", torch.version.cuda)
+
     SELECTED_DATASET = config.experiment.dataset_name
     SEED = config.experiment.seed
 
