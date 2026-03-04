@@ -12,7 +12,7 @@ import re
 def load_whu(zip_path, patchify=False, patch_size=(256, 256), verbose=False, dataset_dest=None):
     MODULE_DIR = get_module_dir()
     DATA_DEST = f"{MODULE_DIR}/WHU_CD"
-    DATA_PATCH_FOLDER = f"{MODULE_DIR}/LEVIR_CD_PATCHED/" if dataset_dest is None else dataset_dest
+    DATA_PATCH_FOLDER = f"{MODULE_DIR}/WHU_CD_PATCHED/" if dataset_dest is None else dataset_dest
     print(f"Loading WHU-CD from {zip_path} to {DATA_PATCH_FOLDER}")
 
     if os.path.exists(DATA_DEST):
@@ -40,7 +40,7 @@ def load_whu(zip_path, patchify=False, patch_size=(256, 256), verbose=False, dat
         os.makedirs(split_path + "/" + "A/")
         os.makedirs(split_path + "/" + "B/")
         os.makedirs(split_path + "/" + "label/")
-        image_path_prefix = os.path.join(DATA_DEST, f"{DATA_SOURCE.split('/')[-1][:-4]}/Building change detection dataset_add/1. The two-period image data/")
+        image_path_prefix = os.path.join(DATA_DEST, f"{zip_path.split('/')[-1][:-4]}/Building change detection dataset_add/1. The two-period image data/")
         image_dict = {
             "A": os.path.join(image_path_prefix, f"2012/whole_image/{split}/image/2012_{split}.tif"),
             "B": os.path.join(image_path_prefix, f"2016/whole_image/{split}/image/2016_{split}.tif"),
@@ -78,23 +78,20 @@ def load_paths(split, root=f"{get_module_dir()}/WHU_CD_PATCHED"):
     return x1_paths, x2_paths, mask_paths
 
 class WHU_CD_Dataset(BaseDataset):
-    def __init__(self, root=f"{get_module_dir()}/WHU_CD_PATCHED", split="train", pair_transforms=None, return_y_image=False):
-        '''
-        assume data is already patchified.
-        splits: train, test
-        '''
-            
-        print(f"WHU-CD ROOT: {root}")
-        x1_dir = f"{root}/{split}/A/"
-        x2_dir = f"{root}/{split}/B/"
-        mask_dir = f"{root}/{split}/label/"
+    def __init__(self, root, split="train", pair_transforms=None, return_y_image=False):
 
-        x1_paths = sorted(glob.glob(f"{x1_dir}/*.png"), key=sort_by_last_number)
-        x2_paths = sorted(glob.glob(f"{x2_dir}/*.png"), key=sort_by_last_number)
-        mask_paths = sorted(glob.glob(f"{mask_dir}/*.png"), key=sort_by_last_number)
+        x1_dir = os.path.join(root, split, "A")
+        x2_dir = os.path.join(root, split, "B")
+        mask_dir = os.path.join(root, split, "label")
 
-        print(f"x1 num: {len(x1_paths)}")
-        print(f"x2 num: {len(x2_paths)}")
-        print(f"mask num: {len(mask_paths)}")
-        
+        x1_paths = sorted(glob.glob(os.path.join(x1_dir, "*.png")), key=sort_by_last_number)
+        x2_paths = sorted(glob.glob(os.path.join(x2_dir, "*.png")), key=sort_by_last_number)
+        mask_paths = sorted(glob.glob(os.path.join(mask_dir, "*.png")), key=sort_by_last_number)
+
+        if len(x1_paths) == 0:
+            raise RuntimeError(
+                f"No data found in {x1_dir}. "
+                "Did you run prepare_whu?"
+            )
+
         super().__init__(x1_paths, x2_paths, mask_paths, pair_transforms, return_y_image)

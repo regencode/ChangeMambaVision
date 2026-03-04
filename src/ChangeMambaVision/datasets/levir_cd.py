@@ -56,25 +56,20 @@ def load_levir(dataset_folder_path, patchify=False, patch_size=(256, 256), verbo
     print("Data patchify complete")
 
 class LEVIR_CD_Dataset(BaseDataset):
-    def __init__(self, root=f"{get_module_dir()}/LEVIR_CD_PATCHED", split="train", pair_transforms=None, return_y_image=False):
-        '''
-        assume data is already patchified.
-        splits: train, test, val
-        '''
+    def __init__(self, root, split="train", pair_transforms=None, return_y_image=False):
 
-        print(f"LEVIR-CD ROOT: {root}")
-        x1_dir = f"{root}/{split}/A/"
-        x2_dir = f"{root}/{split}/B/"
-        mask_dir = f"{root}/{split}/label/"
+        x1_dir = os.path.join(root, split, "A")
+        x2_dir = os.path.join(root, split, "B")
+        mask_dir = os.path.join(root, split, "label")
 
-        x1_paths = glob.glob(f"{x1_dir}/*.png")
-        x2_paths = glob.glob(f"{x2_dir}/*.png")
-        mask_paths = glob.glob(f"{mask_dir}/*.png")
+        x1_paths = sorted(glob.glob(os.path.join(x1_dir, "*.png")))
+        x2_paths = sorted(glob.glob(os.path.join(x2_dir, "*.png")))
+        mask_paths = sorted(glob.glob(os.path.join(mask_dir, "*.png")))
 
-        print(f"x1 num: {len(x1_paths)}")
-        print(f"x2 num: {len(x2_paths)}")
-        print(f"mask num: {len(mask_paths)}")
+        if len(x1_paths) == 0:
+            raise RuntimeError(
+                f"No data found in {x1_dir}. "
+                "Did you run prepare_levir?"
+            )
 
         super().__init__(x1_paths, x2_paths, mask_paths, pair_transforms, return_y_image)
-
-
