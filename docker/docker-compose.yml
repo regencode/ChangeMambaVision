@@ -5,7 +5,8 @@ services:
       dockerfile: ./docker/Dockerfile
     volumes:
       - /data:/app/data
-    command: --config /app/configs/cdmamba-config.yaml
+      - /opt/configs:/app/configs
+    command: --config /app/configs/config.yaml
     runtime: nvidia
 
 
