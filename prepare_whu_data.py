@@ -6,7 +6,7 @@ import torch
 import argparse
 import cv2 as cv
 from torchvision.utils import save_image
-from .base_dataset import BaseDataset, Patchify
+from ChangeMambaVision.datasets.base_dataset import BaseDataset, Patchify
 
 
 # -------------------------------------------------
