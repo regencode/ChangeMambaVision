@@ -3,6 +3,8 @@ services:
     build: 
       context: ..
       dockerfile: ./docker/Dockerfile
+      args:
+        CACHEBUST: ${CACHEBUST:-1}   # default 1, can be overridden
     volumes:
       - /data:/app/data
       - /opt/configs:/app/configs
