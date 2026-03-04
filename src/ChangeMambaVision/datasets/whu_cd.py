@@ -16,7 +16,7 @@ def load_whu(zip_path, patchify=False, patch_size=(256, 256), verbose=False, dat
     print(f"Loading WHU-CD from {zip_path} to {DATA_PATCH_FOLDER}")
 
     if os.path.exists(DATA_DEST):
-        print("Data unzip dest folder already exists! Skipping loading data...")
+        print("Data dest folder already exists! Skipping unzipping data...")
     else: 
         os.makedirs(DATA_DEST)
         dest = shutil.copy(zip_path, DATA_DEST)

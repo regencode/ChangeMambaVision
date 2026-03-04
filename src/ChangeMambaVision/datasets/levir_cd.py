@@ -13,22 +13,20 @@ def load_levir(dataset_folder_path, patchify=False, patch_size=(256, 256), verbo
     DATA_PATCH_FOLDER = f"{MODULE_DIR}/LEVIR_CD_PATCHED/" if dataset_dest is None else dataset_dest
     print(f"Loading LEVIR-CD from {dataset_folder_path} to {DATA_PATCH_FOLDER}")
 
-
     if os.path.exists(DATA_DEST):
-        print("Data patch folder already exists! Skipping loading and unzipping data...")
-        return
-
-    data_splits = glob.glob(dataset_folder_path + "*.zip")
-    if(len(data_splits) <= 0):
-        print("Zip files not found in LEVIR-CD folder")
-        return
-    os.makedirs(DATA_DEST)
-    for split in data_splits:
-        dest = shutil.copy(split, DATA_DEST)
-        os.makedirs(DATA_DEST + "/" + dest.split("/")[-1][:-4])
-        with zipfile.ZipFile(split, 'r') as z:
-            z.extractall(DATA_DEST + "/" + dest.split("/")[-1][:-4])
-        print("Data load and unzip complete")
+        print("Data dest folder already exists! Skipping unzipping data...")
+    else:
+        data_splits = glob.glob(dataset_folder_path + "*.zip")
+        if(len(data_splits) <= 0):
+            print("Zip files not found in LEVIR-CD folder")
+            return
+        os.makedirs(DATA_DEST)
+        for split in data_splits:
+            dest = shutil.copy(split, DATA_DEST)
+            os.makedirs(DATA_DEST + "/" + dest.split("/")[-1][:-4])
+            with zipfile.ZipFile(split, 'r') as z:
+                z.extractall(DATA_DEST + "/" + dest.split("/")[-1][:-4])
+            print("Data load and unzip complete")
 
     patcher = Patchify(*patch_size)
     if os.path.exists(DATA_PATCH_FOLDER):
