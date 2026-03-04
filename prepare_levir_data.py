@@ -24,7 +24,8 @@ def unzip_raw(raw_dir, unzip_dir):
         with zipfile.ZipFile(zfile, 'r') as z:
             z.extractall(split_dest)
 
-def patchify_dataset(unzip_dir, processed_dir, patcher):
+def patchify_dataset(unzip_dir, processed_dir, patch_size):
+    patcher = Patchify(*patch_size)
     for split in ["train", "val", "test"]:
         split_src = os.path.join(unzip_dir, split)
         split_dest = os.path.join(processed_dir, split)
@@ -50,11 +51,11 @@ def patchify_dataset(unzip_dir, processed_dir, patcher):
                     )
                     save_image(patch.float()/255.0, save_path)
 
-def prepare_levir(raw_dir, processed_dir, patcher):
+def prepare_levir(raw_dir, processed_dir, patch_size=(256, 256)):
     unzip_dir = os.path.join(processed_dir, "unzipped")
 
     unzip_raw(raw_dir, unzip_dir)
-    patchify_dataset(unzip_dir, processed_dir, patcher)
+    patchify_dataset(unzip_dir, processed_dir, patch_size)
 
     print(f"LEVIR-CD data preparation complete, patched dataset is at {processed_dir}")
 
@@ -68,5 +69,5 @@ if __name__ == "__main__":
     prepare_levir(
         raw_dir=args.raw_dir,
         processed_dir=args.processed_dir,
-        patcher=Patchify(ph=args.patch_size, pw=args.patch_size)
+        patch_size=(args.patch_size, args.patch_size)
     )

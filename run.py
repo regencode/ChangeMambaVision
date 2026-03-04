@@ -2,6 +2,8 @@ import argparse
 import os
 import yaml
 from types import SimpleNamespace
+from prepare_whu_data import prepare_whu
+from prepare_levir_data import prepare_levir
 import torch
 from torch import nn, optim
 from torch.optim import lr_scheduler
@@ -22,6 +24,9 @@ from ChangeMambaVision.utils import augmentations as A
 import glob, shutil, os
 from pyunpack import Archive
 from torch.utils.data import DataLoader
+from ChangeMambaVision.datasets.base_dataset import BaseDataset
+from ChangeMambaVision.datasets.whu_cd import load_paths
+from sklearn.model_selection import train_test_split
 from torchinfo import summary
 
 def dict_to_namespace(d):
@@ -37,8 +42,9 @@ def main(config):
     MODEL_NAME = f"{config.experiment.model_name}_seed{SEED}_{SELECTED_DATASET}" # for file naming
 
     SAVE_FOLDER_PATH = config.paths.save_folder
-    DATA_SOURCE = config.paths.data_source
-    ROOT = config.paths.root
+    ZIP_PATH = config.paths.zip_path
+    RAW_DIR = config.paths.raw_dir
+    PROCESSED_DIR = config.paths.processed_dir
 
 
     EPOCHS = config.training.epochs
@@ -111,15 +117,17 @@ def main(config):
     )
 
     if SELECTED_DATASET == "levir":
-        load_levir(DATA_SOURCE, dataset_dest=ROOT, patchify=True, patch_size=(256, 256))
-        train_data = LEVIR_CD_Dataset(root=ROOT, split="train", pair_transforms=train_transforms)
-        val_data = LEVIR_CD_Dataset(root=ROOT, split="val")
-        test_data = LEVIR_CD_Dataset(root=ROOT, split="test")
+        prepare_levir(raw_dir=RAW_DIR, processed_dir=PROCESSED_DIR, patch_size=(256, 256))
+        train_data = LEVIR_CD_Dataset(root=PROCESSED_DIR, split="train", pair_transforms=train_transforms)
+        val_data = LEVIR_CD_Dataset(root=PROCESSED_DIR, split="val")
+        test_data = LEVIR_CD_Dataset(root=PROCESSED_DIR, split="test")
     elif SELECTED_DATASET == "whu":
-        load_whu(DATA_SOURCE, dataset_dest=ROOT, patchify=True, patch_size=(256, 256))
-        train_data = WHU_CD_Dataset(root=ROOT, split="train", pair_transforms=train_transforms)
-        val_data = WHU_CD_Dataset(root=ROOT, split="val")
-        test_data = WHU_CD_Dataset(root=ROOT, split="test")
+        prepare_whu(zip_path=ZIP_PATH, raw_dir=RAW_DIR, processed_dir=PROCESSED_DIR, patch_size=(256, 256))
+        X1, X2, y = load_paths(root=PROCESSED_DIR, split="train")
+        X1_train, X1_val, X2_train, X2_val, y_train, y_val = train_test_split(X1, X2, y, test_size=0.2, random_state=SEED)
+        train_data = BaseDataset(X1_train, X2_train, y_train, pair_transforms=train_transforms)
+        val_data = BaseDataset(X1_val, X2_val, y_val)
+        test_data = WHU_CD_Dataset(root=PROCESSED_DIR, split="test")
     else:
         print("no valid dataset selected")
         return
