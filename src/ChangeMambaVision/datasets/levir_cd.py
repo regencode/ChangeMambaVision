@@ -11,6 +11,7 @@ def load_levir(dataset_folder_path, patchify=False, patch_size=(256, 256), verbo
     MODULE_DIR = get_module_dir()
     DATA_DEST = f"{MODULE_DIR}/LEVIR_CD"
     DATA_PATCH_FOLDER = f"{MODULE_DIR}/LEVIR_CD_PATCHED/" if dataset_dest is None else dataset_dest
+    print(f"Loading LEVIR-CD from {dataset_folder_path} to {DATA_PATCH_FOLDER}")
 
 
     if os.path.exists(DATA_DEST):
