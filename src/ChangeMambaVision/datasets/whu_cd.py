@@ -9,10 +9,10 @@ from sklearn.model_selection import train_test_split
 import glob
 import re
 
-def load_whu(zip_path, patchify=False, patch_size=(256, 256), verbose=False, skip_copy=True):
+def load_whu(zip_path, patchify=False, patch_size=(256, 256), verbose=False, dataset_dest=None):
     MODULE_DIR = get_module_dir()
     DATA_DEST = f"{MODULE_DIR}/WHU_CD"
-    DATA_PATCH_FOLDER = f"{MODULE_DIR}/WHU_CD_PATCHED/"
+    DATA_PATCH_FOLDER = f"{MODULE_DIR}/LEVIR_CD_PATCHED/" if dataset_dest is None else dataset_dest
 
     if os.path.exists(DATA_DEST):
         print("Data unzip dest folder already exists! Skipping loading data...")

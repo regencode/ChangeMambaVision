@@ -13,6 +13,7 @@ from pytorch_lightning.callbacks import ModelCheckpoint
 from pytorch_lightning.loggers import CSVLogger
 import ChangeMambaVision
 from ChangeMambaVision.datasets.levir_cd import LEVIR_CD_Dataset, load_levir
+from ChangeMambaVision.datasets.whu_cd import WHU_CD_Dataset, load_whu
 from ChangeMambaVision.utils.train_test_val import train_one_epoch, test_one_epoch
 from ChangeMambaVision.utils.display import display_images
 import mamba_ssm
@@ -86,7 +87,6 @@ def main(config):
     summary(model, input_size=((1, 3, 256, 256), (1, 3, 256, 256)))
 
     # Load dataset if its not loaded yet, and patchify
-    load_levir(DATA_SOURCE, patchify=True, patch_size=(256, 256))
     loss_fn = torch.nn.CrossEntropyLoss()
     logger = CSVLogger(
         save_dir=os.path.join(SAVE_FOLDER_PATH, "logs"),
@@ -111,13 +111,15 @@ def main(config):
     )
 
     if SELECTED_DATASET == "levir":
-        train_data = LEVIR_CD_Dataset(split="train", pair_transforms=train_transforms)
-        val_data = LEVIR_CD_Dataset(split="val")
-        test_data = LEVIR_CD_Dataset(split="test")
+        load_levir(DATA_SOURCE, dataset_dest=ROOT, patchify=True, patch_size=(256, 256))
+        train_data = LEVIR_CD_Dataset(root=ROOT, split="train", pair_transforms=train_transforms)
+        val_data = LEVIR_CD_Dataset(root=ROOT, split="val")
+        test_data = LEVIR_CD_Dataset(root=ROOT, split="test")
     elif SELECTED_DATASET == "whu":
-        train_data = LEVIR_CD_Dataset(split="train", pair_transforms=train_transforms)
-        val_data = LEVIR_CD_Dataset(split="val")
-        test_data = LEVIR_CD_Dataset(split="test")
+        load_whu(DATA_SOURCE, dataset_dest=ROOT, patchify=True, patch_size=(256, 256))
+        train_data = WHU_CD_Dataset(root=ROOT, split="train", pair_transforms=train_transforms)
+        val_data = WHU_CD_Dataset(root=ROOT, split="val")
+        test_data = WHU_CD_Dataset(root=ROOT, split="test")
     else:
         print("no valid dataset selected")
         return

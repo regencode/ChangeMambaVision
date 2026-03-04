@@ -7,10 +7,11 @@ from .base_dataset import BaseDataset, Patchify, get_module_dir
 from torchvision.utils import save_image
 
 
-def load_levir(dataset_folder_path, patchify=False, patch_size=(256, 256), verbose=False):
+def load_levir(dataset_folder_path, patchify=False, patch_size=(256, 256), verbose=False, dataset_dest=None):
     MODULE_DIR = get_module_dir()
     DATA_DEST = f"{MODULE_DIR}/LEVIR_CD"
-    DATA_PATCH_FOLDER = f"{MODULE_DIR}/LEVIR_CD_PATCHED/"
+    DATA_PATCH_FOLDER = f"{MODULE_DIR}/LEVIR_CD_PATCHED/" if dataset_dest is None else dataset_dest
+
 
     if os.path.exists(DATA_DEST):
         print("Data patch folder already exists! Skipping loading and unzipping data...")
@@ -27,10 +28,6 @@ def load_levir(dataset_folder_path, patchify=False, patch_size=(256, 256), verbo
         with zipfile.ZipFile(split, 'r') as z:
             z.extractall(DATA_DEST + "/" + dest.split("/")[-1][:-4])
         print("Data load and unzip complete")
-
-    if not patchify:
-        print("Skip patchify data (patchify == False)")
-        return
 
     patcher = Patchify(*patch_size)
     if os.path.exists(DATA_PATCH_FOLDER):
