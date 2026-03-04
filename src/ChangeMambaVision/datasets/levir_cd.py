@@ -64,6 +64,7 @@ class LEVIR_CD_Dataset(BaseDataset):
         splits: train, test, val
         '''
 
+        print(f"LEVIR-CD ROOT: {root}")
         x1_dir = f"{root}/{split}/A/"
         x2_dir = f"{root}/{split}/B/"
         mask_dir = f"{root}/{split}/label/"
@@ -71,6 +72,10 @@ class LEVIR_CD_Dataset(BaseDataset):
         x1_paths = glob.glob(f"{x1_dir}/*.png")
         x2_paths = glob.glob(f"{x2_dir}/*.png")
         mask_paths = glob.glob(f"{mask_dir}/*.png")
+
+        print(f"x1 num: {len(x1_paths)}")
+        print(f"x2 num: {len(x2_paths)}")
+        print(f"mask num: {len(mask_paths)}")
 
         super().__init__(x1_paths, x2_paths, mask_paths, pair_transforms, return_y_image)
 

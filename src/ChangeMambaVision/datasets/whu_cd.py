@@ -84,6 +84,7 @@ class WHU_CD_Dataset(BaseDataset):
         splits: train, test
         '''
             
+        print(f"WHU-CD ROOT: {root}")
         x1_dir = f"{root}/{split}/A/"
         x2_dir = f"{root}/{split}/B/"
         mask_dir = f"{root}/{split}/label/"
@@ -91,5 +92,9 @@ class WHU_CD_Dataset(BaseDataset):
         x1_paths = sorted(glob.glob(f"{x1_dir}/*.png"), key=sort_by_last_number)
         x2_paths = sorted(glob.glob(f"{x2_dir}/*.png"), key=sort_by_last_number)
         mask_paths = sorted(glob.glob(f"{mask_dir}/*.png"), key=sort_by_last_number)
+
+        print(f"x1 num: {len(x1_paths)}")
+        print(f"x2 num: {len(x2_paths)}")
+        print(f"mask num: {len(mask_paths)}")
         
         super().__init__(x1_paths, x2_paths, mask_paths, pair_transforms, return_y_image)
