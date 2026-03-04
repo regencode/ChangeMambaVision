@@ -80,7 +80,7 @@ def main(config):
     MODEL_CONFIG = vars(config.model)
     norm = vars(MODEL_CONFIG["norm"])
     print(norm)
-    MODEL_CONFIG["norm"] = (norm["type"], vars(norm["args"]))
+    MODEL_CONFIG["norm"] = [norm["type"], {"num_groups": vars(norm["num_groups"])}]
     model = CDMamba(**MODEL_CONFIG)
     model = model.to("cuda")
     summary(model, input_size=((1, 3, 256, 256), (1, 3, 256, 256)))
