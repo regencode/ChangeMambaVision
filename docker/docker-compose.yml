@@ -9,7 +9,14 @@ services:
       - /data:/app/data
       - /opt/configs:/app/configs
     command: --config /app/configs/config.yaml
-    runtime: nvidia
+#    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
 
 
