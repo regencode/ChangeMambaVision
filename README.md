@@ -29,7 +29,7 @@ match the size of the patched dataset images
 
 For now supported usage is through code/notebook as linked in the example usage notebook.
 
-Example usage notebook: [Google Colab](https://colab.research.google.com/drive/1a4PRenQ04i1NBtV05Zzv-i5woGyuMGdc?usp=sharing)
+Example notebook (copy of our experiment notebook): [Google Colab](https://colab.research.google.com/drive/1a4PRenQ04i1NBtV05Zzv-i5woGyuMGdc?usp=sharing)
 
 ## Available checkpoints
 
